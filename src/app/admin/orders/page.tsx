@@ -99,7 +99,7 @@ export default function ManageOrders() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-6xl mx-auto px-4 space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div className="flex items-center gap-3">
           <Link href="/admin">
