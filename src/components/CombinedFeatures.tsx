@@ -116,30 +116,21 @@ export function CombinedFeatures() {
             </p>
           </motion.div>
 
-          {/* Block 5: Instant Match with Character 3 */}
+          {/* Block 5: Instant Match */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ delay: 0.3 }}
-            className="md:col-span-2 lg:col-span-1 rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#00FF87]/30 transition-all group relative overflow-hidden flex flex-col"
+            className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#00FF87]/30 transition-all group"
           >
-            <div className="relative z-10">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 bg-[#00FF87]/10 border border-[#00FF87]/20">
-                <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#00FF87]" />
-              </div>
-              <h3 className="font-orbitron text-lg sm:text-xl font-black mb-2 uppercase tracking-wider text-white">Instant Match</h3>
-              <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                Get matched with a top-tier booster within minutes.
-              </p>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 bg-[#00FF87]/10 border border-[#00FF87]/20">
+              <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#00FF87]" />
             </div>
-             {/* Character 3 - Hidden on mobile */}
-             <motion.img
-              src="/assets/character/character3.png"
-              alt="Character 3"
-              className="hidden sm:block absolute bottom-0 left-1/2 -translate-x-1/2 h-[45%] sm:h-[55%] w-auto max-w-none object-contain drop-shadow-[0_0_20px_rgba(0,255,135,0.2)] group-hover:scale-105 transition-transform duration-700"
-              style={{ transformOrigin: 'bottom center' }}
-            />
+            <h3 className="font-orbitron text-lg sm:text-xl font-black mb-2 uppercase tracking-wider text-white">Instant Match</h3>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              Get matched with a top-tier booster within minutes.
+            </p>
           </motion.div>
 
           {/* Block 6: Watch It Climb - Step 03 - Full width on mobile */}
