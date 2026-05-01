@@ -25,14 +25,9 @@ export function CombinedFeatures() {
           </h2>
         </div>
 
-        {/* 
-          Mobile: Single column, consistent card sizes
-          Tablet: 2 columns
-          Desktop: 4 columns with bento layout, varied sizes
-        */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           
-          {/* Block 1: Top 1% Boosters - Full width on mobile, 2 cols on desktop */}
+          {/* Block 1: Top 1% Booster - Full width on mobile, 2 cols on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -57,24 +52,7 @@ export function CombinedFeatures() {
             />
           </motion.div>
 
-          {/* Block 2: Choose Your Rank - Step 01 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: 0.1 }}
-            className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-white/[0.02] border border-white/[0.08] hover:border-[#00FF87]/30 transition-all group"
-          >
-            <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00FF87]/10 border border-[#00FF87]/30">
-              <span className="font-orbitron text-[10px] sm:text-xs font-black text-[#00FF87]">01</span>
-            </div>
-            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00FF87] transition-colors">Pilih Rank Anda</h3>
-            <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
-              Pilih posisi rank Anda sekarang dan target rank yang diinginkan. Dapatkan harga instan.
-            </p>
-          </motion.div>
-
-          {/* Block 3: 100% Account Safe with Character 2 */}
+          {/* Block 3: 100% Akun Aman with Character 2 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -86,7 +64,7 @@ export function CombinedFeatures() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#00D4FF]/10 border border-[#00D4FF]/20">
                 <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[#00D4FF]" />
               </div>
-              <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">100% Akun Aman</h3>
+              <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 sm:mb-3 uppercase tracking-wider text-white">100% Akun Aman</h3>
               <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                 Perlindungan VPN, mode ofline, dan kredensial terenkripsi.
               </p>
@@ -100,24 +78,7 @@ export function CombinedFeatures() {
             />
           </motion.div>
 
-          {/* Block 4: Match a Booster - Step 02 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: 0.15 }}
-            className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-white/[0.02] border border-white/[0.08] hover:border-[#00D4FF]/30 transition-all group"
-          >
-            <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00D4FF]/10 border border-[#00D4FF]/30">
-              <span className="font-orbitron text-[10px] sm:text-xs font-black text-[#00D4FF]">02</span>
-            </div>
-            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00D4FF] transition-colors">Cocokkan dengan Booster</h3>
-            <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
-              Pemain top-tier terverifikasi ditugaskan secara instan. Tanpa menunggu lama.
-            </p>
-          </motion.div>
-
-          {/* Block 5: Instant Match */}
+          {/* Block 5: Cocokkan Instan */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,32 +89,13 @@ export function CombinedFeatures() {
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#00FF87]/10 border border-[#00FF87]/20">
               <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#00FF87]" />
             </div>
-            <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">Cocokkan Instan</h3>
+            <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 sm:mb-3 uppercase tracking-wider text-white">Cocokkan Instan</h3>
             <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
               Dapatkan booster top-tier dalam hitungan menit.
             </p>
           </motion.div>
 
-          {/* Block 6: Watch It Climb - Step 03 - Full width on mobile */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: 0.35 }}
-            className="md:col-span-2 rounded-2xl sm:rounded-3xl p-5 sm:p-8 bg-white/[0.02] border border-white/[0.08] hover:border-[#7B2FFF]/30 transition-all group flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
-          >
-            <div className="w-10 h-10 sm:w-16 sm:h-16 shrink-0 rounded-full flex items-center justify-center bg-[#7B2FFF]/10 border border-[#7B2FFF]/30">
-              <span className="font-orbitron text-base sm:text-xl font-black text-[#7B2FFF]">03</span>
-            </div>
-            <div>
-              <h3 className="font-orbitron text-base sm:text-2xl font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#7B2FFF] transition-colors">Pantau Rank Naik</h3>
-              <p className="text-gray-500 text-xs sm:text-base leading-relaxed">
-                Pantau progres kenaikan rank secara langsung dari dashboard Anda. Duduk santai dan biarkan profesional kami yang mengerjakannya.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Block 7: 24/7 Support */}
+          {/* Block 7: Dukungan 24/7 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -170,7 +112,7 @@ export function CombinedFeatures() {
             </p>
           </motion.div>
 
-          {/* Block 8: Money-Back Guarantee with Character 4 */}
+          {/* Block 8: Garansi Uang Kembali with Character 4 */}
           <motion.div
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
@@ -196,7 +138,7 @@ export function CombinedFeatures() {
             />
           </motion.div>
 
-          {/* Block 9: Fast Delivery */}
+          {/* Block 9: Pengiriman Cepat */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
