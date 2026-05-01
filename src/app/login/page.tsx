@@ -41,7 +41,12 @@ export default function LoginPage() {
           const redirect = searchParams.get('redirect');
           
           if (redirect) {
-            router.push(`/${redirect}`);
+            // Handle anchor links (e.g., #ranks) vs page routes
+            if (redirect.startsWith('#')) {
+              window.location.href = '/' + redirect;
+            } else {
+              router.push(`/${redirect}`);
+            }
           } else if (profile?.role === 'admin') {
             // Admin can access both - default to admin but user can navigate to dashboard
             router.push("/admin");

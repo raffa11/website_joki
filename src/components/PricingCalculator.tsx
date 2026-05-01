@@ -205,7 +205,7 @@ export function PricingCalculator() {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         if (confirm("You must be logged in to place an order. Redirect to login page?")) {
-          window.location.href = "/login?redirect=pricing-section";
+          window.location.href = "/login?redirect=#ranks";
         }
         return;
       }
@@ -281,7 +281,7 @@ export function PricingCalculator() {
                     const { data: { session } } = await supabase.auth.getSession();
                     if (!session) {
                       if (confirm("You must be logged in to place an order. Redirect to login page?")) {
-                        window.location.href = "/login?redirect=pricing-section";
+                        window.location.href = "/login?redirect=#ranks";
                       }
                       return;
                     }
