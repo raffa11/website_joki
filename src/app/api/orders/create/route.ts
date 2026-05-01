@@ -26,6 +26,9 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Authentication required to place an order." }, { status: 401 });
+    }
 
     const {
       gameId,

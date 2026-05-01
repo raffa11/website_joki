@@ -263,8 +263,22 @@ export function PricingCalculator() {
                     <p className="text-4xl font-black text-neonGreen font-orbitron glow-green">{fmtIDR(pricing.total_price)}</p>
                   </div>
                 </div>
-                <button className="btn-solid-neon w-full max-w-md h-14 rounded-xl uppercase tracking-widest text-sm disabled:opacity-50" 
-                  disabled={pricing.total_price <= 0} onClick={() => updateState('step', 1)}>Next Step →</button>
+                <button 
+                  className="btn-solid-neon w-full max-w-md h-14 rounded-xl uppercase tracking-widest text-sm disabled:opacity-50" 
+                  disabled={pricing.total_price <= 0} 
+                  onClick={async () => {
+                    const { data: { session } } = await supabase.auth.getSession();
+                    if (!session) {
+                      if (confirm("You must be logged in to place an order. Redirect to login page?")) {
+                        window.location.href = "/login?redirect=pricing-section";
+                      }
+                      return;
+                    }
+                    updateState('step', 1);
+                  }}
+                >
+                  Next Step →
+                </button>
               </div>
             </motion.div>
           ) : state.step === 1 ? (

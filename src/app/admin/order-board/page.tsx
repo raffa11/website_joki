@@ -45,188 +45,156 @@ function SortableOrderCard({ order, progress, onStatusUpdate, onUpdateProgress, 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0.6 : 1,
+    zIndex: isDragging ? 50 : 1,
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <Card className="bg-darker border-cardHover hover:border-neon/40 transition-all cursor-grab active:cursor-grabbing group shadow-sm hover:shadow-neon/5">
-        <CardHeader className="p-3 pb-1">
-          <div className="flex justify-between items-start gap-1">
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="relative">
+      <Card className={`bg-darker/80 border-cardHover hover:border-neon/40 transition-all cursor-grab active:cursor-grabbing group shadow-lg ${isDragging ? 'ring-2 ring-neon/50 scale-105' : ''}`}>
+        <CardHeader className="p-3 pb-2 border-b border-white/5">
+          <div className="flex justify-between items-start">
             <div className="space-y-0.5">
               <div className="flex items-center gap-1.5">
-                <CardTitle className="text-white text-sm font-bold font-orbitron tracking-tight">
+                <span className="text-neon font-black text-xs font-orbitron tracking-wider">
                   {order.order_code || `#${order.id.substring(0, 8).toUpperCase()}`}
-                </CardTitle>
-                <Link href={`/admin/orders/${order.id}`} onClick={(e) => e.stopPropagation()} className="shrink-0">
-                  <ExternalLink className="w-2.5 h-2.5 text-gray-500 hover:text-neon transition-colors" />
+                </span>
+                <Link href={`/admin/orders/${order.id}`} onClick={(e) => e.stopPropagation()} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ExternalLink className="w-3 h-3 text-gray-500 hover:text-neon" />
                 </Link>
               </div>
-              <div className="flex items-center gap-1 text-[9px] text-gray-500 uppercase tracking-tighter font-orbitron">
+              <div className="flex items-center gap-1 text-[8px] text-gray-500 uppercase font-orbitron">
                 <Clock className="w-2.5 h-2.5" />
                 <span>{new Date(order.created_at).toLocaleDateString()}</span>
               </div>
             </div>
-            <span className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded border ${
+            <div className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-full border shadow-sm ${
               order.payment_status === 'paid' 
                 ? 'bg-green-500/10 text-green-400 border-green-500/20' 
                 : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
             }`}>
               {order.payment_status || 'unpaid'}
-            </span>
+            </div>
           </div>
         </CardHeader>
         
-        <CardContent className="p-3 pt-0 space-y-3">
-          <div className="flex items-center justify-between bg-white/5 p-1.5 rounded-md border border-white/5">
+        <CardContent className="p-3 space-y-3">
+          {/* Customer Info Row */}
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-neon/10 flex items-center justify-center border border-neon/20">
-                <User className="w-3 h-3 text-neon" />
+              <div className="w-7 h-7 rounded-lg bg-card border border-cardHover flex items-center justify-center">
+                <User className="w-3.5 h-3.5 text-gray-400" />
               </div>
               <div className="flex flex-col">
-                <span className="text-white text-xs font-semibold leading-none">
+                <span className="text-white text-[11px] font-bold leading-none truncate max-w-[100px]">
                   {order.user_name || 'Anonymous'}
                 </span>
-                {order.game_id && (
-                  <span className="text-[9px] text-gray-500 font-mono mt-1">
-                    ID: {order.game_id}
-                  </span>
-                )}
+                <span className="text-[9px] text-gray-500 font-mono mt-0.5">{order.game_id || 'No ID'}</span>
               </div>
             </div>
-            {(order.phone || order.whatsapp) && (
+            {order.phone && (
               <Link
-                href={`https://wa.me/${order.phone || order.whatsapp}?text=${encodeURIComponent(
-                  `Hello ${order.user_name || 'Customer'}, I am updating you on your order ${order.order_code || order.id.substring(0,8)}!`
-                )}`}
+                href={`https://wa.me/${order.phone}?text=${encodeURIComponent(`Hello, I'm from BoostTrack regarding your order ${order.order_code}`)}`}
                 target="_blank"
                 onClick={(e) => e.stopPropagation()}
-                className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20 hover:bg-green-500/20 transition-colors"
+                className="w-7 h-7 rounded-lg bg-green-500/10 flex items-center justify-center border border-green-500/20 hover:bg-green-500/20 transition-colors"
               >
-                <MessageCircle className="w-3 h-3 text-green-500" />
+                <MessageCircle className="w-3.5 h-3.5 text-green-500" />
               </Link>
             )}
           </div>
 
-          <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-3 p-3 bg-dark/50 rounded-md border border-white/5 overflow-hidden">
-            <div className="flex flex-col items-start">
-              <span className="text-[9px] text-gray-500 uppercase font-orbitron leading-none mb-1.5">From Rank</span>
-              <span className="text-white text-xs font-bold leading-tight">{order.current_rank}</span>
+          {/* Rank Transition Card */}
+          <div className="bg-dark/40 rounded-lg border border-white/5 p-2 flex flex-col gap-1.5">
+            <div className="flex justify-between items-center text-[8px] text-gray-500 uppercase font-orbitron tracking-widest px-1">
+              <span>From</span>
+              <span>Target</span>
             </div>
-            <div className="w-8 h-8 rounded-full bg-neon/5 flex items-center justify-center border border-neon/10">
-              <PlayCircle className="w-4 h-4 text-neon opacity-50" />
-            </div>
-            <div className="flex flex-col items-end text-right">
-              <span className="text-[9px] text-gray-500 uppercase font-orbitron leading-none mb-1.5">Target Rank</span>
-              <span className="text-neon text-xs font-bold leading-tight">{order.target_rank}</span>
+            <div className="flex items-center justify-between gap-1">
+              <span className="text-white text-[10px] font-bold truncate max-w-[70px]">{order.current_rank.split(' ')[0]}</span>
+              <ArrowRight className="w-3 h-3 text-neon/40" />
+              <span className="text-neon text-[10px] font-bold truncate max-w-[70px] text-right">{order.target_rank.split(' ')[0]}</span>
             </div>
           </div>
 
+          {/* Progress Section */}
           <div className="space-y-1.5">
-            <div className="flex justify-between items-center">
-              <span className="text-[9px] text-gray-500 font-orbitron uppercase tracking-tighter">Progress</span>
-              <div className="flex items-center gap-1">
+            <div className="flex justify-between items-center px-0.5">
+              <span className="text-[8px] text-gray-500 font-orbitron uppercase">Progress</span>
+              <span className="text-neon font-black text-[10px]">{progress}%</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex-1 h-1.5 bg-darker rounded-full overflow-hidden border border-white/5">
+                <div 
+                  className={`h-full bg-gradient-to-r ${order.status === 'completed' ? 'from-green-500 to-green-400' : 'from-accentBlue to-neon'} transition-all duration-500 shadow-[0_0_8px_rgba(0,229,255,0.3)]`}
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <div className="flex gap-1">
                 <button 
                   onClick={(e) => { e.stopPropagation(); onUpdateProgress(order.id, Math.max(0, (order.stars_progress || 0) - 1)); }}
-                  className="w-4 h-4 rounded bg-white/5 flex items-center justify-center hover:bg-white/10 text-gray-400 border border-white/10"
+                  className="w-4 h-4 rounded bg-white/5 flex items-center justify-center hover:bg-white/10 text-gray-400 border border-white/10 text-[10px]"
                 >
                   -
                 </button>
-                <span className="text-neon font-bold text-xs min-w-[30px] text-center">
-                  {order.stars_progress || 0}/{order.stars_total || 0}
-                </span>
                 <button 
                   onClick={(e) => { e.stopPropagation(); onUpdateProgress(order.id, Math.min(order.stars_total || 999, (order.stars_progress || 0) + 1)); }}
-                  className="w-4 h-4 rounded bg-white/5 flex items-center justify-center hover:bg-white/10 text-gray-400 border border-white/10"
+                  className="w-4 h-4 rounded bg-white/5 flex items-center justify-center hover:bg-white/10 text-gray-400 border border-white/10 text-[10px]"
                 >
                   +
                 </button>
               </div>
             </div>
-            <div className="w-full h-1.5 bg-darker rounded-full overflow-hidden border border-white/5">
-              <div 
-                className="h-full bg-gradient-to-r from-accentBlue via-neon to-accentBlue bg-[length:200%_100%] animate-shimmer transition-all duration-500"
-                style={{ width: `${progress}%` }}
+          </div>
+
+          {/* Booster Assignment */}
+          <div className="pt-2 border-t border-white/5">
+            <div className="relative group/input">
+              <ShieldCheck className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-500 group-focus-within/input:text-neon transition-colors" />
+              <input 
+                type="text" 
+                placeholder="Assign Booster..."
+                className="w-full bg-dark/40 border border-white/10 rounded-md pl-7 pr-2 py-1.5 text-[9px] text-white focus:outline-none focus:border-neon/30 focus:bg-dark/60 transition-all placeholder:text-gray-600"
+                defaultValue={order.booster || ""}
+                onKeyDown={(e) => e.stopPropagation()}
+                onBlur={async (e) => {
+                  const name = e.target.value;
+                  if (name !== order.booster) {
+                    await fetch('/api/orders/update', {
+                      method: 'PATCH',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ id: order.id, booster: name })
+                    });
+                  }
+                }}
               />
             </div>
           </div>
 
-          {(order.status === 'paid' || order.booster) && (
-            <div className="pt-2 flex flex-col gap-1.5 border-t border-white/5">
-              {order.status === 'paid' ? (
-                <div className="relative group/input">
-                  <ShieldCheck className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-500 group-focus-within/input:text-neon transition-colors" />
-                  <input 
-                    type="text" 
-                    placeholder="Booster Name"
-                    className="w-full bg-darker border border-white/10 rounded pl-7 pr-2 py-1.5 text-[10px] text-white focus:outline-none focus:border-neon/50 transition-all"
-                    defaultValue={order.booster || ""}
-                    onKeyDown={(e) => e.stopPropagation()}
-                    onBlur={async (e) => {
-                      const name = e.target.value;
-                      if (name !== order.booster) {
-                        await fetch('/api/orders/update', {
-                          method: 'PATCH',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ id: order.id, booster: name })
-                        });
-                      }
-                    }}
-                  />
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 p-1.5 rounded bg-yellow-500/5 border border-yellow-500/10">
-                  <ShieldCheck className="w-3 h-3 text-yellow-500 shrink-0" />
-                  <span className="text-white text-[10px] font-bold">Booster: {order.booster}</span>
-                </div>
-              )}
-            </div>
-          )}
-
-          <div className="flex gap-1.5 pt-2 border-t border-white/5">
+          {/* Action Buttons */}
+          <div className="flex gap-1.5">
             {order.status === 'new' && (
-              <Button
-                size="sm"
-                className="bg-green-500 hover:bg-green-600 text-white text-[10px] h-7 flex-1 font-orbitron px-1"
-                onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'paid'); }}
-              >
-                MARK PAID
+              <Button size="sm" className="bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/30 text-[9px] h-7 flex-1 font-orbitron" onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'paid'); }}>
+                PAID
               </Button>
             )}
             {order.status === 'paid' && (
-              <Button
-                size="sm"
-                className="bg-accentBlue hover:bg-accentBlue/80 text-white text-[10px] h-7 flex-1 font-orbitron px-1"
-                onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'in_progress'); }}
-              >
-                START BOOST
+              <Button size="sm" className="bg-accentBlue/20 hover:bg-accentBlue/30 text-accentBlue border border-accentBlue/30 text-[9px] h-7 flex-1 font-orbitron" onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'in_progress'); }}>
+                START
               </Button>
             )}
             {order.status === 'in_progress' && (
               <>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10 text-[10px] h-7 flex-1 font-orbitron px-1"
-                  onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'paused'); }}
-                >
+                <Button size="sm" variant="outline" className="border-yellow-500/30 text-yellow-500 hover:bg-yellow-500/10 text-[9px] h-7 flex-1 font-orbitron" onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'paused'); }}>
                   PAUSE
                 </Button>
-                <Button
-                  size="sm"
-                  className="bg-neon hover:bg-neon/80 text-dark text-[10px] h-7 flex-1 font-orbitron font-bold px-1"
-                  onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'completed'); }}
-                >
-                  COMPLETE
+                <Button size="sm" className="bg-neon/20 hover:bg-neon/30 text-neon border border-neon/30 text-[9px] h-7 flex-1 font-orbitron font-bold" onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'completed'); }}>
+                  FINISH
                 </Button>
               </>
             )}
             {order.status === 'paused' && (
-              <Button
-                size="sm"
-                className="bg-accentBlue hover:bg-accentBlue/80 text-white text-[10px] h-7 flex-1 font-orbitron px-1"
-                onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'in_progress'); }}
-              >
+              <Button size="sm" className="bg-accentBlue/20 hover:bg-accentBlue/30 text-accentBlue border border-accentBlue/30 text-[9px] h-7 flex-1 font-orbitron" onClick={(e) => { e.stopPropagation(); onStatusUpdate(order.id, 'in_progress'); }}>
                 RESUME
               </Button>
             )}
