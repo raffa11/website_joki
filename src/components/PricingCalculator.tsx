@@ -15,7 +15,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-/* ── Asset Constants ────────────────────────────────────────── */
+/* ── Asset Constants ────────────────────────────────── */
 const RANK_IMAGES: Record<string, string> = {
   warrior: "/assets/ranks/Warrior.png",
   elite: "/assets/ranks/Elite.png",
@@ -185,7 +185,7 @@ export function PricingCalculator() {
   const updateState = (key: string, value: any) => setState(prev => ({ ...prev, [key]: value }));
   const updateRank = (type: 'current' | 'target', data: any) => 
     setState(prev => ({ ...prev, [type]: { ...prev[type], ...data } }));
-
+  
   const currentMaxStars = getRankMaxStars(state.current.id);
   const targetMaxStars = getRankMaxStars(state.target.id);
 
@@ -196,7 +196,7 @@ export function PricingCalculator() {
 
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!state.paymentMethod) return alert("Select payment method");
+    if (!state.paymentMethod) return alert("Pilih metode pembayaran");
     
     try {
       updateState('loading', true);
@@ -204,12 +204,12 @@ export function PricingCalculator() {
       // Check if user is logged in before submitting
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        if (confirm("You must be logged in to place an order. Redirect to login page?")) {
+        if (confirm("Anda harus login untuk memesan. Redirect ke halaman login?")) {
           window.location.href = "/login?redirect=#ranks";
         }
         return;
       }
-      
+
       const res = await fetch("/api/orders/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -225,9 +225,9 @@ export function PricingCalculator() {
       });
       const data = await res.json();
       if (data.success) window.location.href = `/track?code=${data.order.order_code}&success=true`;
-      else alert(data.error || "Order submission failed");
+      else alert(data.error || "Pengiriman pesanan gagal");
     } catch (error) {
-      alert("Submission failed. Please try again.");
+      alert("Pengiriman gagal. Silakan coba lagi.");
     } finally {
       updateState('loading', false);
     }
@@ -243,10 +243,10 @@ export function PricingCalculator() {
             <motion.div key="calc" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-4">
                 <div className="flex flex-col items-center flex-1 w-full">
-                  <span className="text-[13px] font-orbitron font-bold tracking-widest uppercase text-white mb-2">Current Rank</span>
+                  <span className="text-[13px] font-orbitron font-bold tracking-widest uppercase text-white mb-2">Rank Saat Ini</span>
                   <div className="flex items-center gap-6 h-14 mt-2">
                     <TierCarousel value={state.current.tier} tiers={getTierList(state.current.id)} onChange={(tier: number) => updateRank('current', { tier })} />
-                    <StarCarousel value={state.current.star} maxStars={currentMaxStars} onChange={(star: number) => updateRank('current', { star })} label="Stars" rankId={state.current.id} />
+                    <StarCarousel value={state.current.star} maxStars={currentMaxStars} onChange={(star: number) => updateRank('current', { star })} label="Bintang" rankId={state.current.id} />
                   </div>
                   <RankCarousel rankId={state.current.id} onRankChange={(id: string) => updateRank('current', { id, tier: getTierList(id)[0], star: getRankMinStars(id) })} />
                 </div>
@@ -254,10 +254,10 @@ export function PricingCalculator() {
                 <div className="flex items-center justify-center lg:pt-40"><ArrowRight className="w-6 h-6 text-neonGreen lg:rotate-0 rotate-90" /></div>
 
                 <div className="flex flex-col items-center flex-1 w-full">
-                  <span className="text-[13px] font-orbitron font-bold tracking-widest uppercase text-white mb-2">Target Rank</span>
+                  <span className="text-[13px] font-orbitron font-bold tracking-widest uppercase text-white mb-2">Rank Target</span>
                   <div className="flex items-center gap-6 h-14 mt-2">
                     <TierCarousel value={state.target.tier} tiers={getTierList(state.target.id)} onChange={(tier: number) => updateRank('target', { tier })} />
-                    <StarCarousel value={state.target.star} maxStars={targetMaxStars} onChange={(star: number) => updateRank('target', { star })} label="Stars" rankId={state.target.id} />
+                    <StarCarousel value={state.target.star} maxStars={targetMaxStars} onChange={(star: number) => updateRank('target', { star })} label="Bintang" rankId={state.target.id} />
                   </div>
                   <RankCarousel rankId={state.target.id} onRankChange={(id: string) => updateRank('target', { id, tier: getTierList(id)[0], star: getRankMinStars(id) })} />
                 </div>
@@ -266,11 +266,11 @@ export function PricingCalculator() {
               <div className="mt-12 flex flex-col items-center border-t border-white/5 pt-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-20 mb-8 w-full max-w-md">
                   <div className="text-center">
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-orbitron mb-1">Stars Needed</p>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-orbitron mb-1">Bintang Diperlukan</p>
                     <p className="text-2xl sm:text-4xl font-black text-white font-orbitron">{pricing.stars_needed}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-orbitron mb-1">Total Price</p>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-orbitron mb-1">Total Harga</p>
                     <p className="text-lg sm:text-2xl md:text-4xl font-black text-neonGreen font-orbitron glow-green">{fmtIDR(pricing.total_price)}</p>
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export function PricingCalculator() {
                   onClick={async () => {
                     const { data: { session } } = await supabase.auth.getSession();
                     if (!session) {
-                      if (confirm("You must be logged in to place an order. Redirect to login page?")) {
+                      if (confirm("Anda harus login untuk memesan. Redirect ke halaman login?")) {
                         window.location.href = "/login?redirect=#ranks";
                       }
                       return;
@@ -288,7 +288,7 @@ export function PricingCalculator() {
                     updateState('step', 1);
                   }}
                 >
-                  Next Step →
+                  Langkah Berikutnya →
                 </button>
               </div>
             </motion.div>
@@ -304,18 +304,18 @@ export function PricingCalculator() {
                   <div className="w-8 h-px bg-neonGreen/30"></div>
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-full bg-neonGreen border border-neonGreen flex items-center justify-center text-dark text-[10px] font-orbitron font-bold">2</div>
-                    <span className="text-[10px] text-neonGreen font-orbitron tracking-widest uppercase hidden sm:inline">Details</span>
+                    <span className="text-[10px] text-neonGreen font-orbitron tracking-widest uppercase hidden sm:inline">Detail</span>
                   </div>
                   <div className="w-8 h-px bg-white/10"></div>
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 text-[10px] font-orbitron font-bold">3</div>
-                    <span className="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase hidden sm:inline">Pay</span>
+                    <span className="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase hidden sm:inline">Bayar</span>
                   </div>
                 </div>
 
                 <div className="text-center">
-                  <h2 className="text-2xl font-bold font-orbitron uppercase tracking-wide">Account <span className="text-neonGreen">Details</span></h2>
-                  <p className="text-gray-500 text-xs mt-2">Enter your in-game credentials so our booster can access your account.</p>
+                  <h2 className="text-2xl font-bold font-orbitron uppercase tracking-wide">Detail <span className="text-neonGreen">Akun</span></h2>
+                  <p className="text-gray-500 text-xs mt-2">Masukkan kredensial in-game agar booster kami dapat mengakses akun Anda.</p>
                 </div>
 
                 {/* Order summary mini card */}
@@ -326,7 +326,7 @@ export function PricingCalculator() {
                         <Star className="w-5 h-5 text-neonGreen" />
                       </div>
                       <div>
-                        <p className="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase">Boost Order</p>
+                        <p className="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase">Pesanan Boost</p>
                         <p className="text-white text-sm font-bold">{RANK_CONFIG[state.current.id].name} → {RANK_CONFIG[state.target.id].name}</p>
                       </div>
                     </div>
@@ -342,110 +342,85 @@ export function PricingCalculator() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-[10px] text-gray-400 font-orbitron tracking-widest uppercase pl-1">Game ID</label>
-                      <input placeholder="e.g. 123456789" className="input-field" value={state.formData.gameId} onChange={e => updateState('formData', { ...state.formData, gameId: e.target.value })} />
+                      <input 
+                        type="text" 
+                        placeholder="123456789" 
+                        className="w-full h-10 px-3 rounded-xl bg-white/[0.03] border border-white/10 text-white text-sm focus:outline-none focus:border-neonGreen/50 transition-colors"
+                        value={state.formData.gameId}
+                        onChange={e => updateState('formData', { ...state.formData, gameId: e.target.value })}
+                      />
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] text-gray-400 font-orbitron tracking-widest uppercase pl-1">Server ID</label>
-                      <input placeholder="e.g. 2489" className="input-field" value={state.formData.serverId} onChange={e => updateState('formData', { ...state.formData, serverId: e.target.value })} />
+                      <input 
+                        type="text" 
+                        placeholder="1234" 
+                        className="w-full h-10 px-3 rounded-xl bg-white/[0.03] border border-white/10 text-white text-sm focus:outline-none focus:border-neonGreen/50 transition-colors"
+                        value={state.formData.serverId}
+                        onChange={e => updateState('formData', { ...state.formData, serverId: e.target.value })}
+                      />
                     </div>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[10px] text-gray-400 font-orbitron tracking-widest uppercase pl-1">WhatsApp Number</label>
-                    <input placeholder="e.g. 08123456789" className="input-field" value={state.formData.whatsapp} onChange={e => updateState('formData', { ...state.formData, whatsapp: e.target.value })} />
-                    <p className="text-[9px] text-gray-600 pl-1">We&apos;ll send order updates to this number.</p>
+                    <label className="text-[10px] text-gray-400 font-orbitron tracking-widest uppercase pl-1">WhatsApp</label>
+                    <input 
+                      type="text" 
+                      placeholder="6281234567890" 
+                      className="w-full h-10 px-3 rounded-xl bg-white/[0.03] border border-white/10 text-white text-sm focus:outline-none focus:border-neonGreen/50 transition-colors"
+                      value={state.formData.whatsapp}
+                      onChange={e => updateState('formData', { ...state.formData, whatsapp: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                {/* Payment Method Selection */}
+                <div className="space-y-1.5">
+                  <label className="text-[10px] text-gray-400 font-orbitron tracking-widest uppercase pl-1">Metode Pembayaran</label>
+                  <div className="grid grid-cols-3 gap-3">
+                    {['OVO', 'DANA', 'GoPay'].map((method) => (
+                      <button
+                        key={method}
+                        className={`h-12 rounded-xl border text-sm font-orbitron font-bold tracking-wider transition-all ${
+                          state.paymentMethod === method 
+                            ? 'bg-neonGreen/10 border-neonGreen text-neonGreen shadow-glow' 
+                            : 'bg-white/[0.02] border-white/10 text-gray-500 hover:border-white/20'
+                        }`}
+                        onClick={() => updateState('paymentMethod', method)}
+                      >
+                        {method}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
                 <div className="flex gap-3 pt-2">
-                  <button className="btn-neon flex-1 h-12 rounded-xl uppercase tracking-widest text-xs" onClick={() => updateState('step', 0)}>← Back</button>
-                  <button className="btn-solid-neon flex-[2] h-12 rounded-xl uppercase tracking-widest text-xs disabled:opacity-40" 
-                    disabled={!state.formData.gameId || !state.formData.serverId || !state.formData.whatsapp}
-                    onClick={() => updateState('step', 2)}>Continue to Payment →</button>
+                  <button 
+                    className="flex-1 h-12 rounded-xl border border-white/10 text-white hover:bg-white/5 font-orbitron text-xs uppercase tracking-widest transition-colors"
+                    onClick={() => updateState('step', 0)}
+                  >
+                    ← Kembali
+                  </button>
+                  <button 
+                    className="flex-1 h-12 rounded-xl bg-neonGreen text-dark font-bold font-orbitron text-xs uppercase tracking-widest hover:bg-neonGreen/90 transition-colors disabled:opacity-50"
+                    disabled={!state.formData.gameId || !state.formData.serverId || !state.formData.whatsapp || !state.paymentMethod}
+                    onClick={handleOrderSubmit}
+                  >
+                    {state.loading ? 'MEMPROSES...' : 'PESAN SEKARANG'}
+                  </button>
                 </div>
               </div>
             </motion.div>
           ) : (
-            <motion.div key="pay" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="max-w-lg mx-auto space-y-8">
-                {/* Step indicator */}
-                <div className="flex items-center justify-center gap-3 mb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neonGreen/20 border border-neonGreen/40 flex items-center justify-center text-neonGreen text-[10px] font-orbitron font-bold">1</div>
-                    <span className="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase hidden sm:inline">Rank</span>
-                  </div>
-                  <div className="w-8 h-px bg-neonGreen/30"></div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neonGreen/20 border border-neonGreen/40 flex items-center justify-center text-neonGreen text-[10px] font-orbitron font-bold">2</div>
-                    <span className="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase hidden sm:inline">Details</span>
-                  </div>
-                  <div className="w-8 h-px bg-neonGreen/30"></div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neonGreen border border-neonGreen flex items-center justify-center text-dark text-[10px] font-orbitron font-bold">3</div>
-                    <span className="text-[10px] text-neonGreen font-orbitron tracking-widest uppercase hidden sm:inline">Pay</span>
-                  </div>
-                </div>
-
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold font-orbitron uppercase tracking-wide">Select <span className="text-neonGreen">Payment</span></h2>
-                  <p className="text-gray-500 text-xs mt-2">Choose your preferred payment method to confirm the order.</p>
-                </div>
-
-                {/* Payment method selection */}
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { id: 'QRIS', label: 'QRIS', desc: 'Scan & Pay', icon: '📱' },
-                    { id: 'Bank Transfer', label: 'Transfer', desc: 'BCA / BRI / Mandiri', icon: '🏦' },
-                    { id: 'E-Wallet', label: 'E-Wallet', desc: 'GoPay / OVO / DANA', icon: '💳' },
-                    { id: 'WhatsApp', label: 'WhatsApp', desc: 'Manual Payment', icon: '💬' },
-                  ].map(p => (
-                    <button key={p.id}
-                      className={`relative p-4 rounded-2xl border transition-all text-left group overflow-hidden ${
-                        state.paymentMethod === p.id 
-                          ? 'bg-neonGreen/10 border-neonGreen shadow-[0_0_20px_rgba(0,255,135,0.1)]' 
-                          : 'bg-white/[0.02] border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04]'
-                      }`}
-                      onClick={() => updateState('paymentMethod', p.id)}
-                    >
-                      {state.paymentMethod === p.id && (
-                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-neonGreen flex items-center justify-center">
-                          <span className="text-dark text-[10px] font-bold">✓</span>
-                        </div>
-                      )}
-                      <span className="text-2xl mb-2 block">{p.icon}</span>
-                      <p className="font-bold font-orbitron text-sm tracking-wide text-white">{p.label}</p>
-                      <p className="text-[10px] text-gray-500 mt-0.5">{p.desc}</p>
-                    </button>
-                  ))}
-                </div>
-
-                {/* Order summary */}
-                <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-5 space-y-3">
-                  <p className="text-[10px] text-gray-500 font-orbitron tracking-widest uppercase">Order Summary</p>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-gray-400">Rank Boost</span><span className="text-white">{RANK_CONFIG[state.current.id].name} → {RANK_CONFIG[state.target.id].name}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-400">Stars Needed</span><span className="text-white font-bold">{pricing.stars_needed} ⭐</span></div>
-                    <div className="flex justify-between"><span className="text-gray-400">Game ID</span><span className="text-white font-mono text-xs">{state.formData.gameId} ({state.formData.serverId})</span></div>
-                    <div className="flex justify-between"><span className="text-gray-400">WhatsApp</span><span className="text-white">{state.formData.whatsapp}</span></div>
-                    {state.paymentMethod && <div className="flex justify-between"><span className="text-gray-400">Payment</span><span className="text-neonGreen font-bold">{state.paymentMethod}</span></div>}
-                  </div>
-                  <div className="border-t border-white/[0.06] pt-3 mt-3">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-1 sm:gap-0">
-                      <span className="text-gray-400 text-sm">Total</span>
-                      <span className="text-lg sm:text-xl md:text-2xl font-black font-orbitron text-neonGreen glow-green">{fmtIDR(pricing.total_price)}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <button className="btn-neon flex-1 h-14 rounded-xl uppercase tracking-widest text-xs" onClick={() => updateState('step', 1)}>← Back</button>
-                  <button className="btn-solid-neon flex-[2] h-14 rounded-xl uppercase tracking-widest text-sm disabled:opacity-40"
-                    disabled={!state.paymentMethod || state.loading}
-                    onClick={handleOrderSubmit}
-                  >
-                    {state.loading ? "PROCESSING..." : "PLACE ORDER →"}
-                  </button>
-                </div>
+            <motion.div key="success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
+              <div className="w-20 h-20 mx-auto rounded-full bg-neonGreen/10 border border-neonGreen/30 flex items-center justify-center mb-6">
+                <svg className="w-10 h-10 text-neonGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
               </div>
+              <h2 className="text-3xl font-black font-orbitron uppercase tracking-wide text-white mb-3">Pesanan Berhasil!</h2>
+              <p className="text-gray-400 max-w-sm mx-auto">
+                Periksa dashboard Anda untuk melacak progres boost. Kami akan segera memulai pesanan Anda.
+              </p>
             </motion.div>
           )}
         </AnimatePresence>

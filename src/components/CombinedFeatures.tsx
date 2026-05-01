@@ -18,10 +18,10 @@ export function CombinedFeatures() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-10 sm:mb-16">
           <p className="text-neonCyan text-[11px] font-orbitron tracking-[0.3em] uppercase mb-3">
-            The Ultimate Experience
+            Pengalaman Terbaik
           </p>
           <h2 className="font-orbitron text-2xl sm:text-4xl font-black uppercase tracking-wide text-white">
-            Built for Gamers
+            Dibuat untuk Gamer
           </h2>
         </div>
 
@@ -43,9 +43,9 @@ export function CombinedFeatures() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#7B2FFF]/10 border border-[#7B2FFF]/20">
                 <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-[#7B2FFF]" />
               </div>
-              <h3 className="font-orbitron text-base sm:text-3xl font-black mb-2 sm:mb-3 uppercase tracking-wider text-white">Top 1% Boosters</h3>
+              <h3 className="font-orbitron text-base sm:text-3xl font-black mb-2 sm:mb-3 uppercase tracking-wider text-white">Top 1% Booster</h3>
               <p className="text-gray-400 text-xs sm:text-base leading-relaxed">
-                Only the best Mythical Glory and Immortal players make it to our roster. Your account is handled by proven professionals.
+                Hanya pemain Mythical Glory dan Immortal terbaik yang bergabung dengan tim kami. Akun Anda ditangani oleh profesional berpengalaman.
               </p>
             </div>
             {/* Character 1 - Hidden on mobile, shown on larger screens */}
@@ -68,9 +68,9 @@ export function CombinedFeatures() {
             <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00FF87]/10 border border-[#00FF87]/30">
               <span className="font-orbitron text-[10px] sm:text-xs font-black text-[#00FF87]">01</span>
             </div>
-            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00FF87] transition-colors">Choose Your Rank</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00FF87] transition-colors">Pilih Rank Anda</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
-              Select where you are now and where you want to be. Get an instant price.
+              Pilih posisi rank Anda sekarang dan target rank yang diinginkan. Dapatkan harga instan.
             </p>
           </motion.div>
 
@@ -86,9 +86,9 @@ export function CombinedFeatures() {
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#00D4FF]/10 border border-[#00D4FF]/20">
                 <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[#00D4FF]" />
               </div>
-              <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">100% Account Safe</h3>
+              <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">100% Akun Aman</h3>
               <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                VPN protection, offline mode, and encrypted credentials.
+                Perlindungan VPN, mode ofline, dan kredensial terenkripsi.
               </p>
             </div>
             {/* Character 2 - Hidden on mobile */}
@@ -111,9 +111,9 @@ export function CombinedFeatures() {
             <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00D4FF]/10 border border-[#00D4FF]/30">
               <span className="font-orbitron text-[10px] sm:text-xs font-black text-[#00D4FF]">02</span>
             </div>
-            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00D4FF] transition-colors">Match a Booster</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00D4FF] transition-colors">Cocokkan dengan Booster</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
-              A verified top-tier player is assigned instantly. No waiting around.
+              Pemain top-tier terverifikasi ditugaskan secara instan. Tanpa menunggu lama.
             </p>
           </motion.div>
 
@@ -128,9 +128,9 @@ export function CombinedFeatures() {
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#00FF87]/10 border border-[#00FF87]/20">
               <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#00FF87]" />
             </div>
-            <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">Instant Match</h3>
+            <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">Cocokkan Instan</h3>
             <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-              Get matched with a top-tier booster within minutes.
+              Dapatkan booster top-tier dalam hitungan menit.
             </p>
           </motion.div>
 
@@ -146,9 +146,9 @@ export function CombinedFeatures() {
               <span className="font-orbitron text-base sm:text-xl font-black text-[#7B2FFF]">03</span>
             </div>
             <div>
-              <h3 className="font-orbitron text-base sm:text-2xl font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#7B2FFF] transition-colors">Watch It Climb</h3>
+              <h3 className="font-orbitron text-base sm:text-2xl font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#7B2FFF] transition-colors">Pantau Rank Naik</h3>
               <p className="text-gray-500 text-xs sm:text-base leading-relaxed">
-                Track your rank progress live from your dashboard. Sit back and relax while our pros do the heavy lifting.
+                Pantau progres kenaikan rank secara langsung dari dashboard Anda. Duduk santai dan biarkan profesional kami yang mengerjakannya.
               </p>
             </div>
           </motion.div>
@@ -164,9 +164,9 @@ export function CombinedFeatures() {
             <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#00D4FF]/10 border border-[#00D4FF]/20">
               <HeadphonesIcon className="w-5 h-5 sm:w-5 sm:h-5 text-[#00D4FF]" />
             </div>
-            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white">24/7 Support</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white">Dukungan 24/7</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
-              Chat with our team anytime. We're always here to help.
+              Chat dengan tim kami kapan saja. Kami selalu siap membantu.
             </p>
           </motion.div>
 
@@ -182,9 +182,9 @@ export function CombinedFeatures() {
               <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#7B2FFF]/10 border border-[#7B2FFF]/20">
                 <Lock className="w-5 h-5 sm:w-5 sm:h-5 text-[#7B2FFF]" />
               </div>
-              <h3 className="font-orbitron text-base sm:text-xl font-bold mb-2 uppercase tracking-wider text-white">Money-Back Guarantee</h3>
+              <h3 className="font-orbitron text-base sm:text-xl font-bold mb-2 uppercase tracking-wider text-white">Garansi Uang Kembali</h3>
               <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                Not satisfied? We offer a full refund if we can't deliver what we promised.
+                Tidak puas? Kami menawarkan pengembalian uang penuh jika kami tidak dapat memberikan apa yang kami janjikan.
               </p>
             </div>
              {/* Character 4 - Hidden on mobile */}
@@ -207,9 +207,9 @@ export function CombinedFeatures() {
             <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#00FF87]/10 border border-[#00FF87]/20">
               <Clock className="w-5 h-5 sm:w-5 sm:h-5 text-[#00FF87]" />
             </div>
-            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white">Fast Delivery</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white">Pengiriman Cepat</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
-              Most orders completed within 24-72 hours.
+              Sebagian besar pesanan selesai dalam 24-72 jam.
             </p>
           </motion.div>
 

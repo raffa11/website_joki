@@ -50,7 +50,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-void text-white relative overflow-hidden">
       <Navbar />
 
-      {/* ── Hero ──────────────────────────────────────── */}
+      {/* ── Hero ─────────────────────────────────────── */}
       <HeroSection />
 
       {/* ── Marquee trust strip ────────────────────────── */}
@@ -59,13 +59,13 @@ export default function Home() {
           {[...Array(2)].map((_, rep) => (
             <div key={rep} className="flex items-center gap-16 mr-16">
               {[
-                "10,000+ ORDERS",
-                "⚡ MYTHICAL GLORY BOOSTERS",
-                "🛡️ 100% ACCOUNT SAFETY",
+                "10.000+ PESANAN",
+                "⚡ BOOSTER MITOSIS GLORY",
+                "🛡️ 100% KEAMANAN AKUN",
                 "🏆 99.9% WIN RATE",
                 "⭐ 4.9/5 RATING",
-                "🔥 FASTEST DELIVERY",
-                "💎 MONEY BACK GUARANTEE",
+                "🔥 PENGIRIMAN TERCEPAT",
+                "💎 GARANSI UANG KEMBALI",
               ].map((t, i) => (
                 <span key={`${rep}-${i}`} className="text-[11px] font-orbitron tracking-[0.15em] uppercase text-gray-600">
                   {t}
@@ -90,12 +90,12 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <FadeIn className="text-center mb-14">
-            <p className="text-neonGreen text-[11px] font-orbitron tracking-[0.3em] uppercase mb-3">Pricing</p>
+            <p className="text-neonGreen text-[11px] font-orbitron tracking-[0.3em] uppercase mb-3">Harga</p>
             <h2 className="font-orbitron text-3xl sm:text-4xl font-black uppercase tracking-wide text-white">
-              Calculate Your Boost
+              Hitung Boost Anda
             </h2>
             <p className="text-gray-500 text-sm mt-3 max-w-md mx-auto">
-              Select your current rank and target rank to get an instant price estimate.
+              Pilih rank awal dan target rank untuk mendapatkan estimasi harga instan.
             </p>
           </FadeIn>
 
@@ -118,14 +118,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neonGreen/[0.02] to-transparent" />
         <FadeIn className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <h2 className="font-orbitron text-3xl sm:text-4xl font-black uppercase tracking-wide mb-5 text-white">
-            Ready to Rank Up?
+            Siap Naik Rank?
           </h2>
           <p className="text-gray-500 text-base mb-8 max-w-lg mx-auto">
-            Join thousands of players who trusted us with their journey to the top.
+            Bergabunglah dengan ribuan pemain yang mempercayakan perjalanan rank mereka kepada kami.
           </p>
           <a href="#ranks">
             <button className="btn-solid-neon px-12 py-4 rounded-xl text-sm cursor-pointer">
-              START NOW
+              MULAI SEKARANG
             </button>
           </a>
         </FadeIn>
@@ -142,16 +142,16 @@ export default function Home() {
               </span>
             </div>
             <div className="flex gap-8 text-xs text-gray-500 font-medium">
-              <a href="#hero" className="hover:text-white transition-colors">Home</a>
-              <a href="#ranks" className="hover:text-white transition-colors">Pricing</a>
-              <a href="#boosters" className="hover:text-white transition-colors">Boosters</a>
-              <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
+              <a href="#hero" className="hover:text-white transition-colors">Beranda</a>
+              <a href="#ranks" className="hover:text-white transition-colors">Harga</a>
+              <a href="#boosters" className="hover:text-white transition-colors">Booster</a>
+              <a href="#features" className="hover:text-white transition-colors">Cara Kerja</a>
               <Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-white/5 text-center">
             <p className="text-gray-600 text-[11px] font-orbitron tracking-wider">
-              © {new Date().getFullYear()} BOOSTTRACK. ALL RIGHTS RESERVED.
+              © {new Date().getFullYear()} BOOSTTRACK. SEMUA HAK CIPTA DILINDUNGI.
             </p>
           </div>
         </div>

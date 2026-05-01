@@ -152,23 +152,23 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neonGreen/20 bg-neonGreen/[0.04] text-neonGreen text-[11px] font-orbitron tracking-widest uppercase backdrop-blur-sm"
           >
-            <Zap className="w-3 h-3" /> #1 Mobile Legends Boosting
+            <Zap className="w-3 h-3" /> #1 Joki Mobile Legends
           </motion.div>
 
           <h1 className="font-orbitron text-4xl lg:text-6xl font-black uppercase leading-[1.1] tracking-wide">
-            {word("CLIMB", 0.3)}
-            {word("THE", 0.45)}
+            {word("NAIK", 0.3)}
+            {word("RANK", 0.45)}
             <br className="hidden sm:block" />
             <span className="text-neonGreen">
-              {word("RANKS.", 0.6)}
+              {word("SEKARANG.", 0.6)}
             </span>
             <br />
-            {word("DOMINATE", 0.8)}
+            {word("DOMINASI", 0.8)}
             <br className="hidden sm:block" />
-            {word("THE", 0.95)}
+            {word("MEDAN", 0.95)}
             {" "}
             <span className="text-neonCyan">
-              {word("BATTLEFIELD.", 1.1)}
+              {word("PERTEMPURAN.", 1.1)}
             </span>
           </h1>
 
@@ -178,8 +178,8 @@ export function HeroSection() {
             transition={{ delay: 1.4, duration: 0.8 }}
             className="text-gray-400 text-base max-w-lg leading-relaxed"
           >
-            Professional boosters, real-time tracking, and transparent pricing.
-            Get to your dream rank fast — guaranteed.
+            Booster profesional, pelacakan real-time, dan harga transparan.
+            Capai rank impian Anda dengan cepat — terjamin.
           </motion.p>
 
           {/* Stats strip */}
@@ -190,9 +190,9 @@ export function HeroSection() {
             className="flex gap-8 pt-2"
           >
             {[
-              { icon: Shield, val: "10K+", label: "Orders Done", color: "text-neonGreen" },
+              { icon: Shield, val: "10K+", label: "Pesanan Selesai", color: "text-neonGreen" },
               { icon: Trophy, val: "99.9%", label: "Win Rate", color: "text-neonCyan" },
-              { icon: Zap, val: "< 1hr", label: "Start Time", color: "text-white" },
+              { icon: Zap, val: "< 1jam", label: "Waktu Mulai", color: "text-white" },
             ].map((s, i) => (
               <motion.div
                 key={i}
@@ -222,16 +222,16 @@ export function HeroSection() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                START BOOSTING
+                MULAI BOOSTING
               </motion.button>
             </a>
-            <a href="#how-it-works">
+            <a href="#features">
               <motion.button
                 className="btn-neon px-8 py-4 rounded-xl text-sm cursor-pointer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                HOW IT WORKS
+                CARA KERJANYA
               </motion.button>
             </a>
           </motion.div>
@@ -245,7 +245,7 @@ export function HeroSection() {
         transition={{ delay: 2.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
-        <span className="text-[10px] text-gray-600 tracking-[0.3em] uppercase font-orbitron">Scroll</span>
+        <span className="text-[10px] text-gray-600 tracking-[0.3em] uppercase font-orbitron">Gulir</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
           <ChevronDown className="w-5 h-5 text-neonGreen/40" />
         </motion.div>
