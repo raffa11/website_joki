@@ -53,7 +53,7 @@ export default function ManageUsers() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div className="flex items-center gap-3">
           <Link href="/admin">

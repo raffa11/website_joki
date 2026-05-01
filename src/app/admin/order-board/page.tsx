@@ -371,7 +371,7 @@ export default function AdminOrderBoard() {
       onDragEnd={handleDragEnd}
     >
       <div className="min-h-screen bg-dark p-3 md:p-6">
-        <div className="max-w-7xl mx-auto space-y-4">
+        <div className="max-w-7xl mx-auto py-4 space-y-4">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div className="flex items-center gap-3">
