@@ -1,0 +1,97 @@
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { sendOrderEmail, sendOrderTelegram } from "@/lib/notifications";
+
+export async function POST(req: Request) {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return cookieStore.get(name)?.value;
+          },
+          set(name: string, value: string, options: any) {
+            cookieStore.set({ name, value, ...options });
+          },
+          remove(name: string, options: any) {
+            cookieStore.set({ name, value: "", ...options });
+          },
+        },
+      }
+    );
+    const body = await req.json();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    const {
+      gameId,
+      serverId,
+      whatsapp,
+      currentRank,
+      targetRank,
+      price,
+      starsTotal
+    } = body;
+
+    // Generate a simple order code (e.g., ML-123456)
+    const randomCode = Math.floor(100000 + Math.random() * 900000);
+    const orderCode = `ML-${randomCode}`;
+
+    const { data, error } = await supabase
+      .from("orders")
+      .insert({
+        user_id: user?.id || null,
+        user_name: body.userName || 'Anonymous',
+        game_id: gameId,
+        server_id: serverId,
+        phone: whatsapp,
+        current_rank: currentRank,
+        target_rank: targetRank,
+        price: price,
+        stars_total: starsTotal,
+        order_code: orderCode,
+        payment_method: body.paymentMethod,
+        status: "paid",
+        payment_status: "paid"
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error("[Create Order] Supabase Error:", error);
+      if (error.code === '42703') {
+        return NextResponse.json({ 
+          error: "Database schema mismatch. Please ensure you have run the latest migration in supabase-schema.sql",
+          details: error.message 
+        }, { status: 500 });
+      }
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // ── Send Notifications (non-blocking) ──
+    const notificationData = {
+      order_code: data.order_code,
+      user_name: data.user_name,
+      phone: data.phone || '-',
+      game_id: data.game_id || '-',
+      server_id: data.server_id || '-',
+      current_rank: data.current_rank,
+      target_rank: data.target_rank,
+      price: data.price,
+      payment_method: data.payment_method || '-',
+    };
+
+    // Fire-and-forget: notifications fail gracefully without breaking the order
+    sendOrderEmail(notificationData).catch(err => console.error('[Notify] Email failed:', err));
+    sendOrderTelegram(notificationData).catch(err => console.error('[Notify] Telegram failed:', err));
+
+    return NextResponse.json({ success: true, order: data });
+  } catch (error) {
+    console.error("API error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}

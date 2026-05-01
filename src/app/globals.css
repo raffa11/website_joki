@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --bg-void: #030C10;
+  --neon-green: #00FF87;
+  --neon-cyan: #00D4FF;
+  --neon-purple: #7B2FFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: var(--bg-void);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #020A0E; }
+::-webkit-scrollbar-thumb { background: rgba(0,255,135,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,255,135,0.6); }
+
+/* ── Neon text glow ──────────────────────────────────────────── */
+.glow-green, .glow-neon  { text-shadow: 0 0 20px rgba(0,255,135,0.8), 0 0 60px rgba(0,255,135,0.4); }
+.glow-cyan   { text-shadow: 0 0 20px rgba(0,212,255,0.8), 0 0 60px rgba(0,212,255,0.4); }
+.glow-purple { text-shadow: 0 0 20px rgba(123,47,255,0.8), 0 0 60px rgba(123,47,255,0.4); }
+
+/* ── Neon border cards ───────────────────────────────────────── */
+.card-neon {
+  background: rgba(0,255,135,0.02);
+  border: 1px solid rgba(0,255,135,0.15);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.card-neon:hover {
+  border-color: rgba(0,255,135,0.5);
+  box-shadow: 0 0 40px rgba(0,255,135,0.1), inset 0 0 40px rgba(0,255,135,0.04);
+}
+
+.card-cyan {
+  background: rgba(0,212,255,0.02);
+  border: 1px solid rgba(0,212,255,0.15);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.card-cyan:hover {
+  border-color: rgba(0,212,255,0.5);
+  box-shadow: 0 0 40px rgba(0,212,255,0.1), inset 0 0 40px rgba(0,212,255,0.04);
+}
+
+/* ── Hex clip shape ──────────────────────────────────────────── */
+.hex-clip {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* ── Glitch text ─────────────────────────────────────────────── */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.glitch::before {
+  color: #00FF87;
+  animation: glitch-1 4s infinite;
+  clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+}
+.glitch::after {
+  color: #00D4FF;
+  animation: glitch-2 4s infinite;
+  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+}
+
+@keyframes glitch-1 {
+  0%, 90%, 100% { transform: translate(0); }
+  92%           { transform: translate(-3px, 1px); }
+  94%           { transform: translate(3px, -1px); }
+  96%           { transform: translate(-2px, 2px); }
+}
+@keyframes glitch-2 {
+  0%, 88%, 100% { transform: translate(0); }
+  90%           { transform: translate(3px, -2px); }
+  93%           { transform: translate(-3px, 1px); }
+  95%           { transform: translate(2px, -1px); }
+}
+
+/* ── Particle field canvas ───────────────────────────────────── */
+#particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── Scanline overlay ────────────────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,255,135,0.015) 2px,
+    rgba(0,255,135,0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Angular corner decoration ───────────────────────────────── */
+.corner-tl::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 24px; height: 24px;
+  border-top: 2px solid rgba(0,255,135,0.7);
+  border-left: 2px solid rgba(0,255,135,0.7);
+}
+.corner-br::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 24px; height: 24px;
+  border-bottom: 2px solid rgba(0,255,135,0.7);
+  border-right: 2px solid rgba(0,255,135,0.7);
+}
+
+/* ── Shimmer gradient ────────────────────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(90deg, #00FF87 0%, #00D4FF 25%, #ffffff 50%, #00D4FF 75%, #00FF87 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Counter number ──────────────────────────────────────────── */
+.counter-neon {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Button ──────────────────────────────────────────────────── */
+.btn-neon {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0,255,135,0.12), rgba(0,212,255,0.08));
+  border: 1px solid rgba(0,255,135,0.5);
+  color: #00FF87;
+  font-family: var(--font-orbitron);
+  letter-spacing: 0.12em;
+  transition: all 0.3s;
+}
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,255,135,0.2), rgba(0,212,255,0.15));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-neon:hover::before { opacity: 1; }
+.btn-neon:hover {
+  box-shadow: 0 0 30px rgba(0,255,135,0.5), 0 0 80px rgba(0,255,135,0.2);
+  border-color: rgba(0,255,135,0.9);
+  color: #ffffff;
+}
+
+.btn-solid-neon {
+  background: linear-gradient(135deg, #00FF87, #00C864);
+  color: #030C10;
+  font-family: var(--font-orbitron);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  border: none;
+  transition: all 0.3s;
+}
+.btn-solid-neon:hover {
+  background: linear-gradient(135deg, #00FFB0, #00E87A);
+  box-shadow: 0 0 40px rgba(0,255,135,0.7), 0 0 100px rgba(0,255,135,0.3);
+  transform: translateY(-2px);
+}
+
+/* ── Rank image glow ─────────────────────────────────────────── */
+.rank-glow-green  { filter: drop-shadow(0 0 24px rgba(0,255,135,0.7)) drop-shadow(0 0 60px rgba(0,255,135,0.3)); }
+.rank-glow-cyan   { filter: drop-shadow(0 0 24px rgba(0,212,255,0.7)) drop-shadow(0 0 60px rgba(0,212,255,0.3)); }
+.rank-glow-purple { filter: drop-shadow(0 0 24px rgba(123,47,255,0.7)) drop-shadow(0 0 60px rgba(123,47,255,0.3)); }
+
+/* ── Custom Utilities ─────────────────────────────────────────── */
+.mask-fade-sides {
+  mask-image: linear-gradient(to right, transparent, black 30%, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 30%, black 70%, transparent);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 40px rgba(0,255,135,0.15);
+}
+
+.input-field {
+  width: 100%;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 0 1rem;
+  color: white;
+  font-family: var(--font-orbitron);
+  transition: all 0.3s;
+}
+
+.input-field:focus {
+  border-color: rgba(0, 255, 135, 0.5);
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+}
+
+.btn-neon {
+  background: transparent;
+  border: 1px solid rgba(0, 255, 135, 0.3);
+  color: #00FF87;
+  font-family: var(--font-orbitron);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-neon:hover {
+  background: rgba(0, 255, 135, 0.08);
+  border-color: rgba(0, 255, 135, 0.6);
+}
+
+.btn-solid-neon {
+  background: #00FF87;
+  border: none;
+  color: #000;
+  font-family: var(--font-orbitron);
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 25px rgba(0, 255, 135, 0.3);
+}
+.btn-solid-neon:hover {
+  background: #00e87a;
+  box-shadow: 0 0 35px rgba(0, 255, 135, 0.5);
+  transform: translateY(-1px);
+}
+.btn-solid-neon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.glow-green {
+  text-shadow: 0 0 10px rgba(0, 255, 135, 0.5), 0 0 30px rgba(0, 255, 135, 0.2);
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  
+  .animate-shimmer {
+    animation: shimmer 3s linear infinite;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 135, 0.1);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 135, 0.3);
+  }
+}
