@@ -264,14 +264,14 @@ export function PricingCalculator() {
               </div>
 
               <div className="mt-12 flex flex-col items-center border-t border-white/5 pt-10">
-                <div className="grid grid-cols-2 gap-20 mb-8">
+                <div className="grid grid-cols-2 gap-8 sm:gap-20 mb-8 w-full max-w-md">
                   <div className="text-center">
                     <p className="text-[10px] text-gray-500 uppercase tracking-widest font-orbitron mb-1">Stars Needed</p>
-                    <p className="text-4xl font-black text-white font-orbitron">{pricing.stars_needed}</p>
+                    <p className="text-2xl sm:text-4xl font-black text-white font-orbitron">{pricing.stars_needed}</p>
                   </div>
                   <div className="text-center">
                     <p className="text-[10px] text-gray-500 uppercase tracking-widest font-orbitron mb-1">Total Price</p>
-                    <p className="text-4xl font-black text-neonGreen font-orbitron glow-green">{fmtIDR(pricing.total_price)}</p>
+                    <p className="text-xl sm:text-4xl font-black text-neonGreen font-orbitron glow-green truncate">{fmtIDR(pricing.total_price)}</p>
                   </div>
                 </div>
                 <button 
@@ -431,7 +431,7 @@ export function PricingCalculator() {
                   <div className="border-t border-white/[0.06] pt-3 mt-3">
                     <div className="flex justify-between items-end">
                       <span className="text-gray-400 text-sm">Total</span>
-                      <span className="text-2xl font-black font-orbitron text-neonGreen glow-green">{fmtIDR(pricing.total_price)}</span>
+                      <span className="text-xl sm:text-2xl font-black font-orbitron text-neonGreen glow-green truncate">{fmtIDR(pricing.total_price)}</span>
                     </div>
                   </div>
                 </div>
