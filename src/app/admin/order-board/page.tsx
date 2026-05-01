@@ -463,16 +463,16 @@ export default function AdminOrderBoard() {
           </div>
 
            {/* Order Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 min-h-[calc(100vh-280px)]">
-            {STATUS_COLUMNS.map((column, index) => {
-              const columnOrders = getOrdersByStatus(column.id);
-               
-              return (
-                <div 
-                  key={column.id} 
-                  className={`flex flex-col min-h-[350px] ${index === 0 ? 'md:col-span-2 xl:col-span-2' : ''}`}
-                  data-status={column.id}
-                >
+           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 min-h-[calc(100vh-280px)]">
+             {STATUS_COLUMNS.map((column) => {
+               const columnOrders = getOrdersByStatus(column.id);
+                
+               return (
+                 <div 
+                   key={column.id} 
+                   className="flex flex-col min-h-[350px]"
+                   data-status={column.id}
+                 >
                   <div className={`bg-card/40 backdrop-blur-sm rounded-xl border-t-4 ${column.color} border-2 border-white/10 p-3 flex flex-col h-full shadow-lg`}>
                     {/* Column Header */}
                     <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
