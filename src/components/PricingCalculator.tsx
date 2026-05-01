@@ -200,6 +200,16 @@ export function PricingCalculator() {
     
     try {
       updateState('loading', true);
+      
+      // Check if user is logged in before submitting
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        if (confirm("You must be logged in to place an order. Redirect to login page?")) {
+          window.location.href = "/login?redirect=pricing-section";
+        }
+        return;
+      }
+      
       const res = await fetch("/api/orders/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -210,13 +220,14 @@ export function PricingCalculator() {
           targetRank: `${RANK_CONFIG[state.target.id].name} ${getRomanNumeral(state.target.tier)} (${state.target.star}★)`,
           price: pricing.total_price,
           starsTotal: pricing.stars_needed,
+          userName: session.user?.email?.split('@')[0] || 'User',
         }),
       });
       const data = await res.json();
       if (data.success) window.location.href = `/track?code=${data.order.order_code}&success=true`;
-      else alert(data.error);
+      else alert(data.error || "Order submission failed");
     } catch (error) {
-      alert("Submission failed");
+      alert("Submission failed. Please try again.");
     } finally {
       updateState('loading', false);
     }

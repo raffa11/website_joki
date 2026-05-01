@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShieldAlert, MessageCircle, ChevronDown, User, Activity, Zap, Trophy, CheckCircle2, Clock } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function OrderCard({ order, userName }: { order: any; userName: string }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -177,6 +178,7 @@ export default function DashboardPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState("Player");
+  const router = useRouter();
 
   useEffect(() => {
     const initDashboard = async () => {
@@ -184,11 +186,12 @@ export default function DashboardPage() {
       if (session?.user) {
         fetchUserDataAndOrders(session.user);
       } else {
-        setLoading(false);
+        // Redirect to login if not authenticated
+        router.push("/login?redirect=dashboard");
       }
     };
     initDashboard();
-  }, []);
+  }, [router]);
 
   const fetchUserDataAndOrders = async (user: any) => {
     try {
@@ -210,7 +213,10 @@ export default function DashboardPage() {
         .eq('user_id', user.id)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching orders:", error);
+        throw error;
+      }
       setOrders(orders || []);
 
     } catch (error) {

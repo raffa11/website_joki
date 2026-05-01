@@ -25,9 +25,9 @@ export async function POST(req: Request) {
     );
     const body = await req.json();
 
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      return NextResponse.json({ error: "Authentication required to place an order." }, { status: 401 });
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return NextResponse.json({ error: "Authentication required to place an order. Please login first." }, { status: 401 });
     }
 
     const {
@@ -37,8 +37,14 @@ export async function POST(req: Request) {
       currentRank,
       targetRank,
       price,
-      starsTotal
+      starsTotal,
+      paymentMethod
     } = body;
+
+    // Validate required fields
+    if (!gameId || !serverId || !whatsapp || !currentRank || !targetRank || !price) {
+      return NextResponse.json({ error: "Missing required fields. Please fill in all order details." }, { status: 400 });
+    }
 
     // Generate a simple order code (e.g., ML-123456)
     const randomCode = Math.floor(100000 + Math.random() * 900000);
@@ -47,8 +53,9 @@ export async function POST(req: Request) {
     const { data, error } = await supabase
       .from("orders")
       .insert({
-        user_id: user?.id || null,
-        user_name: body.userName || 'Anonymous',
+        user_id: user.id,
+        user_name: body.userName || user.email?.split('@')[0] || 'User',
+        user_email: user.email,
         game_id: gameId,
         server_id: serverId,
         phone: whatsapp,
@@ -56,8 +63,9 @@ export async function POST(req: Request) {
         target_rank: targetRank,
         price: price,
         stars_total: starsTotal,
+        stars_progress: 0,
         order_code: orderCode,
-        payment_method: body.paymentMethod,
+        payment_method: paymentMethod || 'Unknown',
         status: "paid",
         payment_status: "paid"
       })
@@ -79,6 +87,7 @@ export async function POST(req: Request) {
     const notificationData = {
       order_code: data.order_code,
       user_name: data.user_name,
+      user_email: data.user_email,
       phone: data.phone || '-',
       game_id: data.game_id || '-',
       server_id: data.server_id || '-',
@@ -93,8 +102,8 @@ export async function POST(req: Request) {
     sendOrderTelegram(notificationData).catch(err => console.error('[Notify] Telegram failed:', err));
 
     return NextResponse.json({ success: true, order: data });
-  } catch (error) {
+  } catch (error: any) {
     console.error("API error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
