@@ -55,7 +55,6 @@ export async function POST(req: Request) {
       .insert({
         user_id: user.id,
         user_name: body.userName || user.email?.split('@')[0] || 'User',
-        user_email: user.email,
         game_id: gameId,
         server_id: serverId,
         phone: whatsapp,
