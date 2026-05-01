@@ -29,19 +29,26 @@ export default function LoginPage() {
 
       if (error) throw error;
 
-      if (data.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', data.user.id)
-          .single();
+        if (data.user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', data.user.id)
+            .single();
 
-        if (profile?.role === 'admin') {
-          router.push("/admin");
-        } else {
-          router.push("/dashboard");
+          // Check if there's a redirect parameter
+          const searchParams = new URLSearchParams(window.location.search);
+          const redirect = searchParams.get('redirect');
+          
+          if (redirect) {
+            router.push(`/${redirect}`);
+          } else if (profile?.role === 'admin') {
+            // Admin can access both - default to admin but user can navigate to dashboard
+            router.push("/admin");
+          } else {
+            router.push("/dashboard");
+          }
         }
-      }
     } catch (err: any) {
       setError(err.message || "Failed to sign in");
     } finally {
