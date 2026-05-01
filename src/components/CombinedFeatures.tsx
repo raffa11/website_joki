@@ -25,7 +25,7 @@ export function CombinedFeatures() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 gap-4 sm:gap-5">
           
           {/* Block 1: Top 1% Booster - Full width on mobile, 2 cols on desktop */}
           <motion.div

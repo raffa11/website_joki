@@ -155,7 +155,7 @@ export function HeroSection() {
             <Zap className="w-3 h-3" /> #1 Joki Mobile Legends
           </motion.div>
 
-          <h1 className="font-orbitron text-4xl lg:text-6xl font-black uppercase leading-[1.1] tracking-wide">
+          <h1 className="font-orbitron text-3xl sm:text-4xl lg:text-6xl font-black uppercase leading-[1.1] tracking-wide break-words">
             {word("NAIK", 0.3)}
             {word("RANK", 0.45)}
             <br className="hidden sm:block" />
