@@ -27,8 +27,7 @@ import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-
 import { CSS } from '@dnd-kit/utilities';
 
 const STATUS_COLUMNS = [
-  { id: "new", label: "📥 New Orders", color: "border-yellow-500", bgColor: "bg-yellow-500/5", statuses: ["new"] },
-  { id: "paid", label: "💰 Paid", color: "border-green-500", bgColor: "bg-green-500/5", statuses: ["paid"] },
+  { id: "orders", label: "📥 Orders", color: "border-yellow-500", bgColor: "bg-yellow-500/5", statuses: ["new", "paid"] },
   { id: "in_progress", label: "🎮 In Progress", color: "border-blue-500", bgColor: "bg-blue-500/5", statuses: ["in_progress"] },
   { id: "paused", label: "⏸ Paused", color: "border-orange-500", bgColor: "bg-orange-500/5", statuses: ["paused"] },
   { id: "completed", label: "✅ Completed", color: "border-neon", bgColor: "bg-neon/5", statuses: ["completed"] }
@@ -375,11 +374,23 @@ export default function AdminOrderBoard() {
         <div className="w-full mx-auto space-y-4">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-              <h1 className="text-2xl font-bold font-orbitron text-white uppercase tracking-wide">
-                Order <span className="text-neon">Management</span>
-              </h1>
-              <p className="text-xs text-gray-500 mt-1">Track and manage all customer orders</p>
+            <div className="flex items-center gap-3">
+              <Link href="/admin">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="h-8 border-gray-700 text-gray-300 hover:bg-gray-800 gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                  BACK
+                </Button>
+              </Link>
+              <div>
+                <h1 className="text-2xl font-bold font-orbitron text-white uppercase tracking-wide">
+                  Order <span className="text-neon">Management</span>
+                </h1>
+                <p className="text-xs text-gray-500 mt-1">Track and manage all customer orders</p>
+              </div>
             </div>
             
             <div className="flex flex-wrap items-center gap-2">
@@ -451,18 +462,18 @@ export default function AdminOrderBoard() {
             </div>
           </div>
 
-          {/* Order Columns */}
+           {/* Order Columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 min-h-[calc(100vh-280px)]">
-            {STATUS_COLUMNS.map((column) => {
+            {STATUS_COLUMNS.map((column, index) => {
               const columnOrders = getOrdersByStatus(column.id);
-              
+               
               return (
                 <div 
                   key={column.id} 
-                  className="flex flex-col min-h-[350px]"
+                  className={`flex flex-col min-h-[350px] ${index === 0 ? 'md:col-span-2 xl:col-span-2' : ''}`}
                   data-status={column.id}
                 >
-                  <div className={`bg-card/40 backdrop-blur-sm rounded-xl border-t-2 ${column.color} border-x border-b border-white/5 p-3 flex flex-col h-full shadow-lg`}>
+                  <div className={`bg-card/40 backdrop-blur-sm rounded-xl border-t-4 ${column.color} border-2 border-white/10 p-3 flex flex-col h-full shadow-lg`}>
                     {/* Column Header */}
                     <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
                       <div className="flex items-center gap-2">

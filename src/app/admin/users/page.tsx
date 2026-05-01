@@ -51,15 +51,36 @@ export default function ManageUsers() {
     u.id.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  return (
+   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-end">
-        <div>
-          <h1 className="text-3xl font-bold font-orbitron text-white uppercase tracking-wide">
-            USERS & <span className="text-neon">BOOSTERS</span>
-          </h1>
-          <p className="text-gray-400 mt-1">Manage platform accounts and permissions.</p>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+        <div className="flex items-center gap-3">
+          <Link href="/admin">
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="h-10 px-4 border-gray-700 text-gray-300 hover:bg-gray-800 gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+              BACK
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-3xl font-bold font-orbitron text-white uppercase tracking-wide">
+              USERS & <span className="text-neon">BOOSTERS</span>
+            </h1>
+            <p className="text-gray-400 mt-1">Manage platform accounts and permissions.</p>
+          </div>
         </div>
+        <Button 
+          variant="outline" 
+          size="sm"
+          className="h-10 px-4 border-cardHover text-gray-300 hover:bg-card"
+          onClick={fetchUsers}
+        >
+          Refresh
+        </Button>
+      </div>
         <Button variant="outline" className="border-cardHover text-gray-300" onClick={fetchUsers}>
           Refresh
         </Button>

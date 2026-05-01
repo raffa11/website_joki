@@ -100,11 +100,23 @@ export default function ManageOrders() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-        <div>
-          <h1 className="text-3xl font-bold font-orbitron text-white uppercase tracking-wide">
-            ORDERS <span className="text-neon">LIST</span>
-          </h1>
-          <p className="text-gray-400 mt-1">Full database of customer boosting orders.</p>
+        <div className="flex items-center gap-3">
+          <Link href="/admin">
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="h-10 px-4 border-gray-700 text-gray-300 hover:bg-gray-800 gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+              BACK
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-3xl font-bold font-orbitron text-white uppercase tracking-wide">
+              ORDERS <span className="text-neon">LIST</span>
+            </h1>
+            <p className="text-gray-400 mt-1">Full database of customer boosting orders.</p>
+          </div>
         </div>
         <div className="flex gap-2 w-full md:w-auto">
           <Button variant="outline" className="border-cardHover text-gray-300" onClick={fetchOrders}>
