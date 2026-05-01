@@ -6,7 +6,8 @@ import { Shield, Zap, Trophy, Clock, HeadphonesIcon, Lock } from "lucide-react";
 /**
  * Combined Bento Grid Component
  * Replaces both "Why Choose Us" and "How It Works" with an elegant, character-driven bento layout.
- * Restructured for better mobile experience with consistent sizing.
+ * Mobile: Consistent sizing for all elements
+ * Desktop: Varied sizes for visual hierarchy
  */
 export function CombinedFeatures() {
   return (
@@ -27,7 +28,7 @@ export function CombinedFeatures() {
         {/* 
           Mobile: Single column, consistent card sizes
           Tablet: 2 columns
-          Desktop: 4 columns with bento layout
+          Desktop: 4 columns with bento layout, varied sizes
         */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           
@@ -39,11 +40,11 @@ export function CombinedFeatures() {
             className="md:col-span-2 rounded-2xl sm:rounded-3xl p-5 sm:p-8 bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-white/[0.15] transition-all group relative overflow-hidden"
           >
             <div className="relative z-10 max-w-full sm:max-w-[60%]">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 bg-[#7B2FFF]/10 border border-[#7B2FFF]/20">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#7B2FFF]/10 border border-[#7B2FFF]/20">
                 <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-[#7B2FFF]" />
               </div>
-              <h3 className="font-orbitron text-xl sm:text-3xl font-black mb-2 sm:mb-3 uppercase tracking-wider text-white">Top 1% Boosters</h3>
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+              <h3 className="font-orbitron text-base sm:text-3xl font-black mb-2 sm:mb-3 uppercase tracking-wider text-white">Top 1% Boosters</h3>
+              <p className="text-gray-400 text-xs sm:text-base leading-relaxed">
                 Only the best Mythical Glory and Immortal players make it to our roster. Your account is handled by proven professionals.
               </p>
             </div>
@@ -64,10 +65,10 @@ export function CombinedFeatures() {
             transition={{ delay: 0.1 }}
             className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-white/[0.02] border border-white/[0.08] hover:border-[#00FF87]/30 transition-all group"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00FF87]/10 border border-[#00FF87]/30">
+            <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00FF87]/10 border border-[#00FF87]/30">
               <span className="font-orbitron text-[10px] sm:text-xs font-black text-[#00FF87]">01</span>
             </div>
-            <h3 className="font-orbitron text-sm sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00FF87] transition-colors">Choose Your Rank</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00FF87] transition-colors">Choose Your Rank</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
               Select where you are now and where you want to be. Get an instant price.
             </p>
@@ -82,10 +83,10 @@ export function CombinedFeatures() {
             className="md:col-span-2 lg:col-span-1 rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#00D4FF]/30 transition-all group relative overflow-hidden flex flex-col"
           >
             <div className="relative z-10">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 bg-[#00D4FF]/10 border border-[#00D4FF]/20">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#00D4FF]/10 border border-[#00D4FF]/20">
                 <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[#00D4FF]" />
               </div>
-              <h3 className="font-orbitron text-lg sm:text-xl font-black mb-2 uppercase tracking-wider text-white">100% Account Safe</h3>
+              <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">100% Account Safe</h3>
               <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                 VPN protection, offline mode, and encrypted credentials.
               </p>
@@ -107,10 +108,10 @@ export function CombinedFeatures() {
             transition={{ delay: 0.15 }}
             className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-white/[0.02] border border-white/[0.08] hover:border-[#00D4FF]/30 transition-all group"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00D4FF]/10 border border-[#00D4FF]/30">
+            <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-3 sm:mb-4 bg-[#00D4FF]/10 border border-[#00D4FF]/30">
               <span className="font-orbitron text-[10px] sm:text-xs font-black text-[#00D4FF]">02</span>
             </div>
-            <h3 className="font-orbitron text-sm sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00D4FF] transition-colors">Match a Booster</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#00D4FF] transition-colors">Match a Booster</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
               A verified top-tier player is assigned instantly. No waiting around.
             </p>
@@ -124,10 +125,10 @@ export function CombinedFeatures() {
             transition={{ delay: 0.3 }}
             className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#00FF87]/30 transition-all group"
           >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 bg-[#00FF87]/10 border border-[#00FF87]/20">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-6 bg-[#00FF87]/10 border border-[#00FF87]/20">
               <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#00FF87]" />
             </div>
-            <h3 className="font-orbitron text-lg sm:text-xl font-black mb-2 uppercase tracking-wider text-white">Instant Match</h3>
+            <h3 className="font-orbitron text-base sm:text-xl font-black mb-2 uppercase tracking-wider text-white">Instant Match</h3>
             <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
               Get matched with a top-tier booster within minutes.
             </p>
@@ -141,12 +142,12 @@ export function CombinedFeatures() {
             transition={{ delay: 0.35 }}
             className="md:col-span-2 rounded-2xl sm:rounded-3xl p-5 sm:p-8 bg-white/[0.02] border border-white/[0.08] hover:border-[#7B2FFF]/30 transition-all group flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
           >
-            <div className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-full flex items-center justify-center bg-[#7B2FFF]/10 border border-[#7B2FFF]/30">
-              <span className="font-orbitron text-lg sm:text-xl font-black text-[#7B2FFF]">03</span>
+            <div className="w-10 h-10 sm:w-16 sm:h-16 shrink-0 rounded-full flex items-center justify-center bg-[#7B2FFF]/10 border border-[#7B2FFF]/30">
+              <span className="font-orbitron text-base sm:text-xl font-black text-[#7B2FFF]">03</span>
             </div>
             <div>
-              <h3 className="font-orbitron text-lg sm:text-2xl font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#7B2FFF] transition-colors">Watch It Climb</h3>
-              <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
+              <h3 className="font-orbitron text-base sm:text-2xl font-bold mb-2 uppercase tracking-wider text-white group-hover:text-[#7B2FFF] transition-colors">Watch It Climb</h3>
+              <p className="text-gray-500 text-xs sm:text-base leading-relaxed">
                 Track your rank progress live from your dashboard. Sit back and relax while our pros do the heavy lifting.
               </p>
             </div>
@@ -160,10 +161,10 @@ export function CombinedFeatures() {
             transition={{ delay: 0.4 }}
             className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.15] transition-all group"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#00D4FF]/10 border border-[#00D4FF]/20">
-              <HeadphonesIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#00D4FF]" />
+            <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#00D4FF]/10 border border-[#00D4FF]/20">
+              <HeadphonesIcon className="w-5 h-5 sm:w-5 sm:h-5 text-[#00D4FF]" />
             </div>
-            <h3 className="font-orbitron text-sm sm:text-base font-bold mb-2 uppercase tracking-wider text-white">24/7 Support</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white">24/7 Support</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
               Chat with our team anytime. We're always here to help.
             </p>
@@ -178,10 +179,10 @@ export function CombinedFeatures() {
              className="md:col-span-2 rounded-2xl sm:rounded-3xl p-5 sm:p-8 bg-gradient-to-r from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#7B2FFF]/30 transition-all group relative overflow-hidden flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
           >
             <div className="relative z-10 max-w-full sm:max-w-[60%]">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#7B2FFF]/10 border border-[#7B2FFF]/20">
-                <Lock className="w-4 h-4 sm:w-5 sm:h-5 text-[#7B2FFF]" />
+              <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#7B2FFF]/10 border border-[#7B2FFF]/20">
+                <Lock className="w-5 h-5 sm:w-5 sm:h-5 text-[#7B2FFF]" />
               </div>
-              <h3 className="font-orbitron text-lg sm:text-xl font-bold mb-2 uppercase tracking-wider text-white">Money-Back Guarantee</h3>
+              <h3 className="font-orbitron text-base sm:text-xl font-bold mb-2 uppercase tracking-wider text-white">Money-Back Guarantee</h3>
               <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                 Not satisfied? We offer a full refund if we can't deliver what we promised.
               </p>
@@ -203,10 +204,10 @@ export function CombinedFeatures() {
             transition={{ delay: 0.6 }}
             className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.15] transition-all group"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#00FF87]/10 border border-[#00FF87]/20">
-              <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-[#00FF87]" />
+            <div className="w-10 h-10 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 bg-[#00FF87]/10 border border-[#00FF87]/20">
+              <Clock className="w-5 h-5 sm:w-5 sm:h-5 text-[#00FF87]" />
             </div>
-            <h3 className="font-orbitron text-sm sm:text-base font-bold mb-2 uppercase tracking-wider text-white">Fast Delivery</h3>
+            <h3 className="font-orbitron text-base sm:text-base font-bold mb-2 uppercase tracking-wider text-white">Fast Delivery</h3>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
               Most orders completed within 24-72 hours.
             </p>
