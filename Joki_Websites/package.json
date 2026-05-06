@@ -1,0 +1,10 @@
+{
+  "name": "joki-websites-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix boosttrack",
+    "build": "npm run build --prefix boosttrack",
+    "start": "npm run start --prefix boosttrack"
+  }
+}
